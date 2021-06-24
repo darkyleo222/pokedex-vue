@@ -22,13 +22,13 @@
             flex-direction:row;                   
         }
         .info{
-            width:180px;
+            width:185px;
             margin-top:0px;
             height:325px;
         }
         .sprite{
             margin-right:5px;
-            width:180px;
+            width:185px;
             height:325px;
         }
         

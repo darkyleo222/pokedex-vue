@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-yellow-50 rounded-xl border-blue-400 border-4 info mt-3 p-4">
+    <div class="bg-yellow-50 rounded-xl border-blue-400 border-4 info sm:mt-3 p-1 sm:p-4">
         <div class="flex">
             <div class="types flex flex-col justify-center items-center">
                 <img :src="'https://play.pokemonshowdown.com/sprites/types/' + toProperCase(pokemon.types[0].type.name) + '.png'">
@@ -13,8 +13,8 @@
         <div class="text-l italic">
             {{properGenera}}
         </div>
-        <div class="text-xl italic">
-            {{properText.replace("\f", "")}}
+        <div class="text-lg md:text-xl italic">
+            {{properText.replace("\f", "\n")}}
         </div>
         <hr color="grey" class="mt-3">
         <div class="text-lg">
