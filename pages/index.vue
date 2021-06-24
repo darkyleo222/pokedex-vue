@@ -1,5 +1,5 @@
 <template>
-    <div class="flex h-full justify-center mt-4">
+    <div class="flex justify-center mt-4">
         <pokedex></pokedex>
     </div>
 </template>
@@ -20,6 +20,17 @@
     export default {
         components:{
             pokedex
+        },
+        head(){
+            return{
+                title: 'Vue.js Pokedex',
+                meta:[
+                    {
+                        name:"viewport",
+                        content:"width=device-width,initial-scale=1"
+                    }
+                ]
+            }
         },
         created(){
             pokeService.getAllPokemon().then((response) =>{                

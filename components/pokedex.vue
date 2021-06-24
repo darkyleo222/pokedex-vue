@@ -32,7 +32,7 @@
         height:70vh;
         max-height:700px;
     }
-    @media only screen and (max-width: 600px) {
+    @media (max-width: 600px) {
         .pokedex-container{
             flex-direction:column-reverse;
             width:100vw !important;
@@ -82,6 +82,7 @@
             }
         },
         mounted() {
+            this.windowWidth = window.innerWidth
             window.addEventListener('resize', () => {
                 this.windowWidth = window.innerWidth
             })

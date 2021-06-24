@@ -70,11 +70,12 @@
             findPokemon(pokemon){
                 this.selected = pokemon.name;
                 pokeService.getPokemonByName(this.selected).then(res=>{
-                    this.$store.commit('pokedex/changeSelectedPokemon', res)
+                    pokeService.getPokemonFamily(this.selected).then(res2=>{
+                        this.$store.commit('pokedex/changeSelectedPokemon', res)
+                        this.$store.commit('pokedex/changeSelectedPokemonFamily', res2)
+                    })
                 })
-                pokeService.getPokemonFamily(this.selected).then(res=>{
-                    this.$store.commit('pokedex/changeSelectedPokemonFamily', res)
-                })
+                
             }
         }
     }

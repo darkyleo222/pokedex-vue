@@ -1,40 +1,7 @@
 <template>
     <div class="flex flex-col justify-center items-center poke-container" v-if="pokemon.name">
-        <div class="bg-yellow-50 rounded-xl border-blue-400 border-4 sprite flex justify-center items-center">
-            <img :src="'https://play.pokemonshowdown.com/sprites/ani/' + pokemon.name + '.gif'">
-        </div>
-        <div class="bg-yellow-50 rounded-xl border-blue-400 border-4 info mt-3 p-4">
-            <div class="flex">
-                <div class="types flex flex-col justify-center items-center">
-                    <img :src="'https://play.pokemonshowdown.com/sprites/types/' + toProperCase(pokemon.types[0].type.name) + '.png'">
-                    <img v-if="pokemon.types.length > 1" :src="'https://play.pokemonshowdown.com/sprites/types/' + toProperCase(pokemon.types[1].type.name) + '.png'">
-                </div>
-                <div class="ml-3 text-xl col-span-2">
-                    #{{pokemon.id}} {{toProperCase(pokemon.name)}}
-                </div>
-            </div>
-            <hr color="grey" class="mt-3">
-            <div class="text-l italic">
-                {{properGenera}}
-            </div>
-            <div class="text-xl italic">
-                {{properText.replace("\f", "")}}
-            </div>
-            <hr color="grey" class="mt-3">
-            <div class="text-lg">
-                Base Stats:
-            </div>
-            <div class="flex justify-around">
-                <div>Hp:{{pokemon.stats[0].base_stat}}</div>
-                <div>Atk:{{pokemon.stats[1].base_stat}}</div>
-                <div>Def:{{pokemon.stats[2].base_stat}}</div>
-            </div>
-            <div class="flex justify-around">
-                <div>SpAtk:{{pokemon.stats[3].base_stat}}</div>
-                <div>SpDef:{{pokemon.stats[4].base_stat}}</div>
-                <div>Spe:{{pokemon.stats[5].base_stat}}</div>
-            </div>
-        </div>
+        <pokesprite :pokemon="pokemon"></pokesprite>
+        <poketext :pokemon="pokemon" :pokemonFamily="pokemonFamily"></poketext>
     </div>
 </template>
 
@@ -50,24 +17,33 @@
         width:270px;
         height:312px
     }
-    @media only screen and (max-width: 600px) {
+    @media (max-width: 600px) {
         .poke-container{
             flex-direction:row;                   
         }
-        
+        .info{
+            width:180px;
+            margin-top:0px;
+            height:325px;
+        }
         .sprite{
             margin-right:5px;
-            margin-left:0px;
-            width:195px
+            width:180px;
+            height:325px;
         }
         
     }
 </style>
 
 <script>
-    import pokeService from '../services/pokemonService'
+    import poketext from './poketext.vue'
+    import pokesprite from './pokesprite.vue'
     export default{
         name:'pokeinfo',
+        components:{
+            poketext,
+            pokesprite
+        },
         computed:{
             pokemon(){
                 return this.$store.state.pokedex.selectedPokemon
@@ -75,26 +51,6 @@
             pokemonFamily(){
                 return this.$store.state.pokedex.selectedPokemonFamily
             },
-            properText(){
-                for(let x in this.$store.state.pokedex.selectedPokemonFamily.flavor_text_entries){
-                    if(this.$store.state.pokedex.selectedPokemonFamily.flavor_text_entries[x].language.name === 'en'){
-                        return this.$store.state.pokedex.selectedPokemonFamily.flavor_text_entries[x].flavor_text
-                    }
-                }
-            },
-            properGenera(){
-                for(let x in this.$store.state.pokedex.selectedPokemonFamily.genera){
-                    if(this.$store.state.pokedex.selectedPokemonFamily.genera[x].language.name === 'en'){
-                        return this.$store.state.pokedex.selectedPokemonFamily.genera[x].genus
-                    }
-                }
-            }
-
-        },
-        methods:{
-            toProperCase(string){
-                return string[0].toUpperCase() + string.substr(1, string.length)
-            }
         },
     }
 </script>
