@@ -1,0 +1,6 @@
+@font-face {
+    font-family: "Pokemon DS Font";
+    src: local("Pokemon DS Font"),
+    url(./assets/fonts/pokemon-font.ttf) format("truetype");
+}
+
